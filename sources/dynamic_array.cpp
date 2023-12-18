@@ -217,6 +217,7 @@ void Array<T>::Reserve(size_t new_capacity) {
   Clear(old_arr, old_size, old_capacity);
 }
 
+#ifdef __GNUC__
 template <typename T>
 typename Array<T>::iterator Array<T>::Begin() {
   return iterator(arr_);
@@ -227,7 +228,6 @@ typename Array<T>::iterator Array<T>::End() {
   return iterator(arr_ + size_);
 }
 
-/*
 template <typename T>
 typename Array<T>::const_iterator Array<T>::Begin() const {
   return const_iterator(arr_);
@@ -237,7 +237,7 @@ template <typename T>
 typename Array<T>::const_iterator Array<T>::End() const {
   return const_iterator(arr_ + size_);
 }
-*/
+#endif
 
 template <typename T>
 bool Array<T>::operator==(const Array<T>& other) const {

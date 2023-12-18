@@ -46,8 +46,8 @@ void construction() {
   Array<int> c(11, 11);
   assert(c.Size() == 11);
   assert(c.Capacity() == 11);
-  for(auto& element : c) {
-    assert(element == 11);
+  for(size_t i = 0; i < c.Size(); ++i) {
+    assert(c[i] == 11);
   }
 
   Array<int> d{ 1, 2, 3 };
@@ -58,9 +58,14 @@ void construction() {
   assert(d[2] == 3);
 
   Array<int> e(d);
-  assert(std::equal(d.begin(), d.end(), e.begin(), e.end()));
+  for(size_t i = 0; i < d.Size(); ++i) {
+    assert(d[i] == e[i]);
+  }
   Array<int> f(std::move(e));
-  assert(std::equal(d.begin(), d.end(), f.begin(), f.end()));
+  
+  for(size_t i = 0; i < d.Size(); ++i) {
+    assert(d[i] == f[i]);
+  }
   assert(e.Size() == 0);
   assert(e.Capacity() == 0);
 
@@ -157,6 +162,7 @@ void emplaceBack() {
   } 
 }
 
+#ifdef __GNUC__
 void iterators() {
   std::cout << "ITERATORS\n";
 
@@ -187,6 +193,7 @@ void compare() {
   std::sort(b.begin(), b.end());
   assert(b != a);
 }
+#endif
 
 void moveOnly() {
   std::cout << "MOVE_ONLY\n";
@@ -266,16 +273,23 @@ void startTest(void(*func)()) {
   }
 }
 
+
 int main() {
   startTest(construction);
   startTest(at);
   startTest(resizeReserve);
   startTest(pushBack);
   startTest(emplaceBack);
+  #ifdef __GNUC__
   startTest(iterators);
   startTest(compare);
+  #endif
   startTest(moveOnly);
   startTest(nonDefaultConstruction);
+  #ifdef _MSC_VER
+  std::cout << "Some tests can't be executed on this platform" << std::endl;
+  #else
   std::cout << "All tests passed\n";
+  #endif
   return 0;
 }

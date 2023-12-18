@@ -18,7 +18,7 @@ class Array {
  public:
 
   using iterator = ArrayIterator<T>;
-  //using const_iterator = ArrayIterator<const T>;
+  using const_iterator = ArrayIterator<const T>;
 
   Array() {}
   explicit Array(size_t size);
@@ -54,16 +54,16 @@ class Array {
 
   iterator Begin();
   iterator End();
-/*
+
+#ifdef __GNUC__
   const_iterator Begin() const;
   const_iterator End() const;
-*/
   iterator begin() { return Begin(); }
   iterator end() { return End(); }
-/*
   const_iterator begin() const { return Begin(); }
   const_iterator end() const { return End(); }
-*/
+#endif
+
   bool operator==(const Array&) const;
   bool operator!=(const Array&) const;
 

@@ -4,7 +4,8 @@ project(array)
 
 file(GLOB SOURCES sources/*)
 
-add_library(${CMAKE_PROJECT_NAME} SHARED ${SOURCES})
+add_library(${CMAKE_PROJECT_NAME} STATIC ${SOURCES})
+target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 enable_testing()
 
 set(UNIT_TESTS ${CMAKE_PROJECT_NAME}_tests)
