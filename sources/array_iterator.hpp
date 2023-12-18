@@ -14,12 +14,7 @@ class ArrayIterator { //: public std::iterator<std::random_access_iterator_tag, 
   using pointer = value_type*;
   using reference = value_type&;
 
- friend class Array<T>;
-
- private:
   ArrayIterator(T* ptr) : ptr_(ptr) {}
-
- public:
   ArrayIterator& operator+=(int n) { ptr_ + n; return *this; }
   ArrayIterator& operator-=(int n) { ptr_ - n; return *this; }
 

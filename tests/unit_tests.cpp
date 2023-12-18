@@ -88,6 +88,7 @@ void at() {
   try {
     a.At(3)++;
   } catch(std::invalid_argument& e) {
+    std::cout << e.what() << std::endl;
     return;
   }
   std::abort();
@@ -113,7 +114,7 @@ void resizeReserve() {
   assert(a.Size() == 0);
   assert(a.Capacity() == 11);
   for(size_t i = 0; i < 12; ++i) {
-    a.PushBack(i);
+    a.PushBack(static_cast<int>(i));
   }
   assert(a.Size() == 12);
   assert(a.Capacity() == 11 * RESIZE_COEFFICIENT);
