@@ -123,20 +123,12 @@ size_t Array<T>::Capacity() const {
 
 template <typename T>
 void Array<T>::PushBack(const T& value) {
-  if(size_ == capacity_) {
-    Reserve(capacity_ * RESIZE_COEFFICIENT);
-  }
-  arr_[size_] = value;
-  ++size_;
+  EmplaceBack(value);
 }
 
 template <typename T>
 void Array<T>::PushBack(T&& value) {
-  if(size_ == capacity_) {
-    Reserve(2 * capacity_);
-  }
-  arr_[size_] = std::move(value);
-  ++size_;
+  EmplaceBack(std::move(value));
 }
 
 template <typename T>

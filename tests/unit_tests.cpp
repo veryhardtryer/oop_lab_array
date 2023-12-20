@@ -129,6 +129,11 @@ void pushBack() {
   for(size_t i = 0; i < 10000; ++i) {
     assert(a[i] == i);
   }
+
+  Array<std::string> b;
+  for(size_t i = 0; i < 10; ++i) {
+    b.PushBack(std::string("........."));
+  }
 }
 
 void emplaceBack() {
